@@ -2,7 +2,7 @@ import { Text } from "layout";
 import { INode } from "engine";
 
 export function drawFiber(ctx: CanvasRenderingContext2D, node: INode, offsets: { left: number; top: number }) {
-  const { metrics } = node;
+  const { metrics, rects } = node;
 
   if (!metrics) throw new Error('Fiber is not measured!');
 
@@ -10,11 +10,18 @@ export function drawFiber(ctx: CanvasRenderingContext2D, node: INode, offsets: {
   const top = metrics.top + offsets.top;
 
   if (node.type === Text) {
-    const text = node.props.content;
     ctx.fillStyle = node.props.style?.color || 'black';
     ctx.font = node.props.style?.font || '16px Arial';
     ctx.textBaseline = 'top';
-    ctx.fillText(text, left, top);
+
+    if (rects) {
+      rects.forEach(({ word, left, top }) => {
+        ctx.fillText(word, left + offsets.left, top + offsets.top);
+      });
+    } else {
+      const text = node.props.content;
+      ctx.fillText(text, left, top);
+    }
   } else {
     ctx.fillStyle = node.props.style?.backgroundColor || 'white';
     ctx.fillRect(left, top, metrics.width, metrics.height);

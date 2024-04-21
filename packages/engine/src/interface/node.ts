@@ -3,16 +3,21 @@ import { IMetrics } from "./renderObject";
 import { IStyle } from "./style";
 
 export interface INode<T = any> {
-  type: InternalLayout;
-  metrics: IMetrics | null;
-  props: T;
-  style: IStyle | null;
-  scrollTop?: number;
-  scrollLeft?: number;
+  _id: string;
   parent: INode | null;
   firstChild: INode | null;
   lastChild: INode | null;
   prevSibling: INode | null;
   nextSibling: INode | null;
+
+  type: InternalLayout;
+  props: T;
+  style: IStyle | null;
+
+  // ----
+  scrollTop?: number;
+  scrollLeft?: number;
   children: INode[];
+  metrics: IMetrics | null;
+  rects?: { word: string; left: number; top: number }[];
 }

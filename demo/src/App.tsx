@@ -1,5 +1,5 @@
 import { Engine, createEffect, createSignal } from 'engine';
-import { Flex, View, Text } from 'layout';
+import { Flex, View, Text, Inline } from 'layout';
 import { View as ViewModule } from 'renderer';
 import { Layout } from 'layout';
 
@@ -44,8 +44,10 @@ export function App(props) {
       </Flex>
       {() => list().map((_, index) => (
         <View>
-          <Text content={`ABCDEFGHIJKLMNOPQRSTUVWXYZqwertyuioplkjhgfdsazxcvbnm${index + 1}`} />
-          <Text content={`xxxxxxxxxxxxxxx${index + 1}`} />
+          <Inline>
+            <Text content={`ABCDEFGHIJKLMNOPQRSTUVWXYZqwertyuioplkjhgfdsazxcvbnm${index + 1}`} />
+            <Text content={`xxxxxxxxxxxxxxx${index + 1}`} />
+          </Inline>
         </View>
       ))}
     </View>

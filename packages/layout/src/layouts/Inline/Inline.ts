@@ -8,18 +8,20 @@ import {
   INLINE,
 } from 'engine';
 import { DEFAULT_METRICS } from '../../consts';
+import { LineBreaker } from 'css-line-break';
+import { measureText } from '../Text/measurement';
 
-export const VIEW_SYMBOL = Symbol('View');
+export const INLINE_SYMBOL = Symbol('Inline');
 
-interface IViewProps extends IDefaultProps {}
+interface IInlineProps extends IDefaultProps {}
 
-export const View: InternalLayout<IViewProps> = (props: IViewProps) => {
+export const Inline: InternalLayout<IInlineProps> = (props: IInlineProps) => {
   return props.children;
 };
 
-View[LAYOUT_TYPE] = BLOCK;
-View[MEASUREMENTS] = {
-  prepare(node: INode<IViewProps>, ctx) {
+Inline[LAYOUT_TYPE] = BLOCK;
+Inline[MEASUREMENTS] = {
+  prepare(node: INode<IInlineProps>, ctx) {
     if (!node.metrics) node.metrics = { ...DEFAULT_METRICS };
 
     const minWidth = node.style?.minWidth;
@@ -47,19 +49,73 @@ View[MEASUREMENTS] = {
     };
   },
   measure(node, ctx) {
-    node.metrics!.width = node.parent
+  },
+  postMeasure(node, ctx) {
+    const width = node.metrics!.width = node.parent
       ? node.parent.metrics!.width
       : ctx.containerConstrains.width;
     node.metrics!.left = 0;
-  },
-  postMeasure(node, ctx) {
-    node.metrics!.height = node.firstChild
-      ? node.firstChild.type[LAYOUT_TYPE] === BLOCK
-        ? node.children.reduce((s, c) => s + c.metrics!.height, 0)
-        : Math.max(...node.children.map((c) => c.metrics!.height))
-      : 0;
-    node.metrics!.top = node.prevSibling
-      ? node.prevSibling.metrics!.top + node.prevSibling.metrics!.height
-      : 0;
+
+    const children = node.children;
+
+    let remain = width;
+    let top = 0;
+    let maxHeight = 0;
+    // TODO: just a demo
+    children.forEach((child, index) => {
+      const fontFamily = child.props.style?.fontFamily || 'Arial';
+      const fontSize = child.props.style?.fontSize || 16;
+      const { fitContent } = ctx.getNodeConstrains(child);
+      if (fitContent && remain >= fitContent) {
+        const { width: wordWidth, height } = measureText(child.props.content, fontFamily, fontSize);
+
+        child.metrics!.left = width - remain;
+        child.metrics!.top = top;
+
+        remain -= wordWidth;
+        maxHeight = Math.max(height, maxHeight);
+      } else {
+        const breaker = LineBreaker(child.props.content, { wordBreak: 'break-all' });
+        const words: string[] = [];
+        let bk;
+
+        while (!(bk = breaker.next()).done) {
+          words.push(bk.value.slice());
+        }
+
+        // just one line
+        if (words.length <= 1 && !index) {
+          child.metrics!.left = width - remain;
+        } else {
+          for (let i = 0; i < words.length; i++) {
+            const word = words[i];
+            const { width: wordWidth, height } = measureText(word, fontFamily, fontSize);
+            if (!child.rects) child.rects = [];
+            if (remain >= wordWidth) {
+              const rect = {
+                top,
+                left: width - remain,
+                word
+              };
+              child.rects.push(rect);
+              remain -= wordWidth;
+              maxHeight = Math.max(height, maxHeight);
+            } else {
+              top += height;
+              const rect = {
+                top,
+                left: 0,
+                word
+              };
+              child.rects.push(rect);
+              remain = width - wordWidth;
+              maxHeight = height;
+            }
+          }
+        }
+      }
+    });
+
+    node.metrics!.height = top + maxHeight;
   },
 };

@@ -19,12 +19,13 @@
     "@types/node": "^18.15.11",
     "eslint": "^8.53.0",
     "eslint-config-custom": "workspace:*",
-    "typescript": "^5.0.4",
     "ts-config": "workspace:*",
+    "typescript": "^5.0.4",
     "vite": "^4.2.1",
     "vite-config": "workspace:*"
   },
   "dependencies": {
+    "css-line-break": "^2.1.0",
     "engine": "workspace:^"
   }
 }

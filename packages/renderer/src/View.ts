@@ -4,7 +4,7 @@ import { drawFiber } from "./drawer";
 export class View implements ViewModule {
   type: 'View' = 'View'
 
-  install(engine): void {
+  install(engine: any): void {
     const dpr = window.devicePixelRatio;
     const canvas = engine.container;
     const ctx = engine.container.getContext('2d');
