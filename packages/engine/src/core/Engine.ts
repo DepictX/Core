@@ -1,9 +1,9 @@
 import { Element } from '../element';
-import { Node } from '../node';
-import type { Module } from '../interface/module';
-import { isInternalLayout } from '../utils/isInternalLayout';
 import { createEffect } from '../hooks';
 import { IEffectElement, IElement } from '../interface';
+import type { Module } from '../interface/module';
+import { Node } from '../node';
+import { isInternalLayout } from '../utils/isInternalLayout';
 import { omit } from '../utils/omit';
 
 export class Engine {
@@ -37,11 +37,11 @@ export class Engine {
     if (!this.rootNode) throw new Error('Create Nodes Failed!');
 
     // 通过 reconciler 优先 measure 视口节点，生成 RenderObject
-    // @ts-expect-error
+    // @ts-expect-error: test
     this.modules.Layout.measure(this.rootNode, constrain);
 
     // 对视口内的 RenderObject 进行绘制
-    // @ts-expect-error
+    // @ts-expect-error: test
     this.modules.View.draw(container, this.rootNode);
 
     // window.addEventListener('__UPDATE_VIEW__', () => {
@@ -50,7 +50,7 @@ export class Engine {
     // });
   }
 
-  destroy() {}
+  destroy() { }
 
   private install() {
     // check modules
@@ -87,7 +87,7 @@ export class Engine {
           });
         } else o[k] = props[k];
         return o;
-      }, {} as {[key: string]: any}));
+      }, {} as { [key: string]: any }));
 
       const style = el.props?.style;
       style && node.updateStyle(Object.keys(style).reduce((o, k) => {
@@ -98,7 +98,7 @@ export class Engine {
           });
         } else o[k] = style[k];
         return o;
-      }, {} as {[key: string]: any}));
+      }, {} as { [key: string]: any }));
 
       this.elementsToNodes.set(el, node);
 
@@ -110,17 +110,17 @@ export class Engine {
       parentNode?.append(node);
     }
 
-    children?.forEach((child) => {
+    children?.forEach(child => {
       if (child instanceof Function) {
         createEffect(() => {
           let elements = child();
           if (!Array.isArray(elements)) elements = [elements];
 
           const olds = this.effectElementsToNodes.get(child);
-          olds?.forEach((old) => old.remove());
+          olds?.forEach(old => old.remove());
           olds?.clear();
 
-          elements.forEach((element) => {
+          elements.forEach(element => {
             // 重新构建 node
             this.build(element, node, child);
           });
@@ -140,10 +140,10 @@ export class Engine {
         height: this.container!.clientHeight,
         width: this.container!.clientWidth,
       };
-      // @ts-ignore
+      // @ts-expect-error: test
       this.modules.Layout.measure(this.rootNode, constrain);
 
-      // @ts-ignore
+      // @ts-expect-error: test
       this.modules.View.draw(this.container, this.rootNode);
       this.building = false;
     });

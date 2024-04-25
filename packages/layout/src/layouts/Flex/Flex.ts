@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   IDefaultProps,
-  IElement,
   LAYOUT_TYPE,
   INode,
   InternalLayout,
   MEASUREMENTS,
   BLOCK,
 } from 'engine';
-import { View } from '../View';
+
 import { DEFAULT_METRICS } from '../../consts';
+import { View } from '../View';
 
 export const FLEX_SYMBOL = Symbol('Flex');
 
@@ -37,7 +38,7 @@ export interface IFlexItemProps {
   // alignSelf?: 'start' | 'end' | 'center' | 'stretch';
 }
 
-export const Flex: InternalLayout<IFlexProps> = (props) => {
+export const Flex: InternalLayout<IFlexProps> = props => {
   return props.children;
 };
 
@@ -52,29 +53,31 @@ Flex[MEASUREMENTS] = {
     if (!node.metrics) node.metrics = { ...DEFAULT_METRICS };
 
     console.assert(
-      children.every((n) => n.type === View),
-      'Flex items must be <View> nodes'
+      children.every(n => n.type === View),
+      'Flex items must be <View> nodes',
     );
 
-    const { gap, flexDirection, flexWrap, justifyContent, alignItems } =
+    const {
+      gap, flexDirection, flexWrap, justifyContent, alignItems, 
+    } =
       node.props;
 
     if (flexDirection === 'column') {
       node.metrics.width =
         node.parent?.metrics?.width || ctx.containerConstrains.width;
-      children.forEach((child) => {});
+      children.forEach(child => {});
     }
 
     return {
       fitContent:
         flexDirection === 'column'
           ? Math.max(
-              ...children.map((c) => ctx.getNodeConstrains(c).fitContent || 0)
-            )
+            ...children.map(c => ctx.getNodeConstrains(c).fitContent || 0),
+          )
           : children.reduce(
-              (s, c) => s + (ctx.getNodeConstrains(c).fitContent || 0),
-              0
-            ),
+            (s, c) => s + (ctx.getNodeConstrains(c).fitContent || 0),
+            0,
+          ),
     };
   },
   measure(node: INode<IFlexProps>, ctx) {
@@ -96,7 +99,7 @@ Flex[MEASUREMENTS] = {
 
     function shareSpace(
       items: { child: INode<IFlexItemProps>; supposeWidth: number; frozen?: boolean }[],
-      space: number
+      space: number,
     ) {
       const flexibleItems = items.filter(({ child, supposeWidth, frozen }) => {
         const { flexGrow = 0, flexShrink = 1 } = child.props;
@@ -112,7 +115,8 @@ Flex[MEASUREMENTS] = {
       let illegal = false;
 
       if (space < 0) {
-        const shrunkSpaces = flexibleItems.map(({ child, supposeWidth }) => (child.props.flexShrink ?? 1) * supposeWidth);
+        const shrunkSpaces = flexibleItems.map(({ child, supposeWidth }) =>
+          (child.props.flexShrink ?? 1) * supposeWidth);
         const total = shrunkSpaces.reduce((a, b) => a + b, 0);
         const ratios = shrunkSpaces.map(space => space / total);
         ratios.forEach((ratio, index) => {
@@ -132,7 +136,7 @@ Flex[MEASUREMENTS] = {
         let total = flexibleItems.reduce((s, { child }) => s + (child.props.flexGrow ?? 0), 0);
         if (total < 1) total = 1;
 
-        flexibleItems.forEach((item) => {
+        flexibleItems.forEach(item => {
           const { child, supposeWidth } = item;
           const width = child.props.flexGrow ? Math.floor(child.props.flexGrow) / total * supposeWidth : supposeWidth;
 
@@ -171,9 +175,9 @@ Flex[MEASUREMENTS] = {
             !basic || basic === 'auto'
               ? fitContent
               : typeof basic === 'number'
-              ? basic
-              : width * Math.max(parseInt(basic), 100) * 100
-          )
+                ? basic
+                : width * Math.max(parseInt(basic), 100) * 100,
+          ),
         );
         const outOfSpace = supposeWidth && space < supposeWidth + (i ? gap : 0);
 
@@ -189,7 +193,10 @@ Flex[MEASUREMENTS] = {
           space -= supposeWidth + (i ? gap : 0);
         }
 
-        lineItems.push({ child, supposeWidth });
+        lineItems.push({
+          child,
+          supposeWidth, 
+        });
       }
 
       if (lineItems.length) {
@@ -223,7 +230,8 @@ Flex[MEASUREMENTS] = {
         lastTop += maxHeight + gap;
       });
 
-      node.metrics!.height = childrenGroups.reduce((h, group) => h + group[0].metrics!.height, 0) + (lines.length - 1) * gap;
+      node.metrics!.height = childrenGroups.reduce((h, group) =>
+        h + group[0].metrics!.height, 0) + (lines.length - 1) * gap;
     }
   },
 };

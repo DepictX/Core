@@ -1,9 +1,9 @@
-import { InternalLayout } from "./layout";
-import { IMetrics } from "./renderObject";
-import { IStyle } from "./style";
+import { InternalLayout } from './layout';
+import { IMetrics } from './renderObject';
+import { IStyle } from './style';
 
 export interface INode<T = any> {
-  _id: string;
+  // _id: string;
   parent: INode | null;
   firstChild: INode | null;
   lastChild: INode | null;

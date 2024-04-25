@@ -1,3 +1,4 @@
+import { LineBreaker } from 'css-line-break';
 import {
   IDefaultProps,
   LAYOUT_TYPE,
@@ -5,10 +6,9 @@ import {
   BLOCK,
   MEASUREMENTS,
   INode,
-  INLINE,
 } from 'engine';
+
 import { DEFAULT_METRICS } from '../../consts';
-import { LineBreaker } from 'css-line-break';
 import { measureText } from '../Text/measurement';
 
 export const INLINE_SYMBOL = Symbol('Inline');
@@ -29,12 +29,17 @@ Inline[MEASUREMENTS] = {
     const minHeight = node.style?.minHeight;
     const maxHeight = node.style?.maxHeight;
 
-    if (!node.firstChild) return { minWidth, maxWidth, minHeight, maxHeight };
+    if (!node.firstChild) return {
+      minWidth,
+      maxWidth,
+      minHeight,
+      maxHeight, 
+    };
 
     const children = node.children;
     console.assert(
-      new Set(children.map((c) => c.type[LAYOUT_TYPE])).size <= 1,
-      'Can not mix BLOCK and INLINE nodes!'
+      new Set(children.map(c => c.type[LAYOUT_TYPE])).size <= 1,
+      'Can not mix BLOCK and INLINE nodes!',
     );
 
     return {
@@ -44,11 +49,11 @@ Inline[MEASUREMENTS] = {
       maxHeight,
       fitContent: children.reduce(
         (s, c) => s + (ctx.getNodeConstrains(c).fitContent || 0),
-        0
-      )
+        0,
+      ),
     };
   },
-  measure(node, ctx) {
+  measure(_node, _ctx) {
   },
   postMeasure(node, ctx) {
     const width = node.metrics!.width = node.parent
@@ -95,7 +100,7 @@ Inline[MEASUREMENTS] = {
               const rect = {
                 top,
                 left: width - remain,
-                word
+                word,
               };
               child.rects.push(rect);
               remain -= wordWidth;
@@ -105,7 +110,7 @@ Inline[MEASUREMENTS] = {
               const rect = {
                 top,
                 left: 0,
-                word
+                word,
               };
               child.rects.push(rect);
               remain = width - wordWidth;

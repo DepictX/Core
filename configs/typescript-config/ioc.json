@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": [
+      "reflect-metadata"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "extends": "./base.json"
+}

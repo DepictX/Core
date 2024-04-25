@@ -1,4 +1,6 @@
-import { IMetrics, INode, IStyle, InternalLayout } from '../interface';
+import {
+  IMetrics, INode, IStyle, InternalLayout, 
+} from '../interface';
 
 export class Node implements INode {
   metrics: IMetrics | null = null;
@@ -29,7 +31,7 @@ export class Node implements INode {
 
   get children() {
     const children: Node[] = [];
-    this.walk((child) => {
+    this.walk(child => {
       children.push(child);
     });
     return children;
@@ -102,11 +104,11 @@ export class Node implements INode {
     /**
      * pre-order traverse, return true will stop traverse children
      */
-    pre?: (node: Node, storage: {[key: string]: any}) => boolean | void;
+    pre?: (node: Node, storage: { [key: string]: any }) => boolean | void;
     /**
      * post-order traverse, return true will stop traverse children
      */
-    post?: (node: Node, storage: {[key: string]: any}) => boolean | void;
+    post?: (node: Node, storage: { [key: string]: any }) => boolean | void;
   }) {
     const { self, pre, post } = config;
     if (!pre && !post) return;
@@ -115,8 +117,12 @@ export class Node implements INode {
 
     if (self && pre?.(this, storage)) return;
 
-    this.children.forEach((child) => {
-      child.descendants({ pre, post, self: true });
+    this.children.forEach(child => {
+      child.descendants({
+        pre,
+        post,
+        self: true, 
+      });
     });
 
     if (self && post?.(this, storage)) return;

@@ -1,4 +1,4 @@
-import { InternalLayout } from "./layout";
+import { InternalLayout } from './layout';
 
 export interface IDefaultProps {
   children: IElement | IElement[];
@@ -12,7 +12,7 @@ export type IEffectElement = () => IElement | IElement[];
 
 export interface IElementProps {
   children?: (IElement | IEffectElement)[];
-  [key: string]: any
+  [key: string]: any;
 }
 
 export interface IElement {
@@ -22,5 +22,5 @@ export interface IElement {
 
   ref?: any;
 
-  props?: IElementProps
+  props?: IElementProps;
 }

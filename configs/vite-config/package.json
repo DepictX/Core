@@ -2,12 +2,12 @@
   "name": "vite-config",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
-  "types": "index.d.ts",
   "keywords": [],
-  "author": "",
   "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
   "devDependencies": {
     "@types/node": "^18.15.11"
   }

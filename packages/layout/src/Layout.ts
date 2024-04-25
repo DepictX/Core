@@ -1,8 +1,10 @@
-import { IConstrains, IMeasureContext, INode, InternalLayout, LayoutModule, MEASUREMENTS } from "engine";
-import { Node } from "engine/src/node";
+import {
+  IConstrains, IMeasureContext, INode, InternalLayout, LayoutModule, MEASUREMENTS, 
+} from 'engine';
+import { Node } from 'engine/src/node';
 
 export class Layout implements LayoutModule {
-  type: "Layout" = "Layout";
+  type = 'Layout' as const;
 
   plugins: {
     type: InternalLayout;
@@ -22,25 +24,36 @@ export class Layout implements LayoutModule {
     const containerConstrains = containerMetrics;
     const getNodeConstrains = (node: INode) => constrains.get(node)!;
 
-    root.descendants({ self: true, post: (node) => {
-      const constrain = node.type[MEASUREMENTS].prepare(node, {
-        containerConstrains,
-        getNodeConstrains
-      });
-      constrains.set(node, constrain);
-    }});
+    root.descendants({
+      self: true,
+      post: node => {
+        const constrain = node.type[MEASUREMENTS].prepare(node, {
+          containerConstrains,
+          getNodeConstrains,
+        });
+        constrains.set(node, constrain);
+      }, 
+    });
 
     const skips = new Set<INode>();
 
     root.descendants({
       self: true,
       pre(node, storage) {
-        const ctx: IMeasureContext = { storage, containerConstrains, getNodeConstrains };
+        const ctx: IMeasureContext = {
+          storage,
+          containerConstrains,
+          getNodeConstrains, 
+        };
         (!node.parent || !skips.has(node.parent)) && node.type[MEASUREMENTS].measure(node, ctx);
         ctx.skipChildren && skips.add(node);
       },
       post(node, storage) {
-        const ctx = { storage, containerConstrains, getNodeConstrains };
+        const ctx = {
+          storage,
+          containerConstrains,
+          getNodeConstrains, 
+        };
         node.type[MEASUREMENTS].postMeasure?.(node, ctx);
       },
     });

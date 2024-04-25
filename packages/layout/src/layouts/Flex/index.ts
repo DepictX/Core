@@ -1,4 +1,4 @@
-import { INode } from "engine";
+import { INode } from 'engine';
 
 export * from './Flex';
 
@@ -15,17 +15,16 @@ export function flexLayout(node: INode) {
   // }
 }
 
-
 function flexDirectionRow(
   node: INode,
-  flexDirection: string,
+  _flexDirection: string,
   alignItems: string,
-  justifyContent: string
+  _justifyContent: string,
 ) {
   let totalFlex = 0;
   const children = node.children;
 
-  children.forEach((child) => {
+  children.forEach(child => {
     totalFlex += child.props.flex || 1;
   });
 
@@ -40,7 +39,7 @@ function flexDirectionRow(
 
   let currentLeft = 0;
   let maxHeight = 0;
-  children.forEach((child) => {
+  children.forEach(child => {
     const flex = child.props.flex || 1;
     const childWidth = (flex / totalFlex) * node.metrics!.width;
 
@@ -70,7 +69,7 @@ function flexDirectionRow(
   let containerHeight = maxHeight;
   if (alignItems === 'stretch') {
     containerHeight = node.metrics.height || maxHeight;
-    children.forEach((child) => {
+    children.forEach(child => {
       child.metrics!.height = containerHeight;
     });
   }

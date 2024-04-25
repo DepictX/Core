@@ -2,23 +2,23 @@
   "name": "depict-x",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
-    "dev": "turbo run dev",
     "build": "turbo run build",
+    "dev": "turbo run dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
-    "type-check": "turbo run type-check",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "type-check": "turbo run type-check"
   },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "eslint": "^8.53.0",
     "prettier": "^3.0.3",
     "turbo": "^1.9.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

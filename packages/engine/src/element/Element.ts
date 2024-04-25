@@ -1,4 +1,4 @@
-import { IElement, IElementProps, IElementType } from "../interface";
+import { IElement, IElementProps, IElementType } from '../interface';
 
 export class Element implements IElement {
   static create(type: IElementType, key?: string, ref?: any, props?: IElementProps) {

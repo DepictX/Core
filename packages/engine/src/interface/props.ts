@@ -1,5 +1,6 @@
-import { Fiber } from "../fiber";
-import { IStyle } from "./style";
+import { Node } from '../node';
+
+import { IStyle } from './style';
 
 export interface DefaultProps {
   id?: string;
@@ -8,5 +9,5 @@ export interface DefaultProps {
   selectable?: boolean;
 
   // 自定义绘制接口
-  draw?(ctx: CanvasRenderingContext2D, fiber: Fiber): void;
+  draw?(ctx: CanvasRenderingContext2D, fiber: Node): void;
 }

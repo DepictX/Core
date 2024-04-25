@@ -1,11 +1,21 @@
 {
-  "name": "eslint-config-custom",
-  "license": "MIT",
-  "main": "config.js",
+  "name": "@depict-x/eslint-config",
   "version": "0.0.0",
-  "private": true,
+  "license": "MIT",
+  "main": "index.js",
   "dependencies": {
-    "@vercel/style-guide": "^5.1.0",
-    "eslint-config-turbo": "^1.10.16"
+    "@typescript-eslint/eslint-plugin": "7.1.0",
+    "@typescript-eslint/parser": "7.1.0",
+    "eslint-config-prettier": "9.1.0"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "1.7.0",
+    "@stylistic/eslint-plugin-ts": "^1.7.0",
+    "eslint-config-react-app": "7.0.1",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

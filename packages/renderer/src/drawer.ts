@@ -1,5 +1,5 @@
-import { Text } from "layout";
-import { INode } from "engine";
+import { INode } from 'engine';
+import { Text } from 'layout';
 
 export function drawFiber(ctx: CanvasRenderingContext2D, node: INode, offsets: { left: number; top: number }) {
   const { metrics, rects } = node;
@@ -30,15 +30,18 @@ export function drawFiber(ctx: CanvasRenderingContext2D, node: INode, offsets: {
   const children = node.children;
 
   // 绘制子节点
-  children.forEach((child) => {
+  children.forEach(child => {
     const { metrics: childMetrics } = child;
     if (!childMetrics) throw new Error('Child is not measured!');
-    const childLayoutData = {
+    const _childLayoutData = {
       left: metrics.left + (childMetrics.left || 0),
       top: metrics.top + (childMetrics.top || 0),
       width: childMetrics.width || 0,
       height: childMetrics.height || 0,
     };
-    drawFiber(ctx, child, { left, top });
+    drawFiber(ctx, child, {
+      left,
+      top, 
+    });
   });
 }

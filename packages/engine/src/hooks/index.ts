@@ -12,7 +12,7 @@ export function createSignal<T>(initialValue: T): [() => T, (v: T) => void] {
   const setter = (newValue: T) => {
     if (value !== newValue) {
       value = newValue;
-      listeners.forEach((listener) => listener());
+      listeners.forEach(listener => listener());
     }
   };
 
@@ -30,7 +30,7 @@ export function createEffect(effect: () => void) {
     currentEffect = execute;
     effect();
     currentEffect = null;
-  }
+  };
 
   execute();
 }

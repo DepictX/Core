@@ -2,25 +2,25 @@
   "name": "event",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "dev": "vite dev --port 3000",
     "build": "vite build",
-    "start": "vite preview",
+    "dev": "vite dev --port 3000",
     "lint": "eslint \"src/**/*.ts\"",
+    "start": "vite preview",
     "type-check": "tsc"
   },
-  "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
+    "@depict-x/eslint-config": "workspace:*",
+    "@depict-x/ts-config": "workspace:*",
     "@types/node": "^18.15.11",
     "eslint": "^8.53.0",
-    "eslint-config-custom": "workspace:*",
     "typescript": "^5.0.4",
-    "ts-config": "workspace:*",
     "vite": "^4.2.1",
     "vite-config": "workspace:*"
   }

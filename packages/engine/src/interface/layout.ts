@@ -30,9 +30,10 @@ export interface IMeasureContext extends IPrepareContext {
   availableSpace?: {
     width?: number;
     height?: number;
-  },
+  };
   /**
-   * when skipChildren is true, mean children nodes already measure by current node, which will skip call children's measure function.
+   * when skipChildren is true, mean children nodes already measure by current node,
+   * which will skip call children's measure function.
    */
   skipChildren?: boolean;
   /**
@@ -40,7 +41,7 @@ export interface IMeasureContext extends IPrepareContext {
    */
   storage: {
     [key: string]: any;
-  }
+  };
 }
 
 export type InternalLayout<T = any> = ((props: T) => IElementChildren) & {
@@ -61,5 +62,5 @@ export type InternalLayout<T = any> = ((props: T) => IElementChildren) & {
      * post-order traversal, usually, measure node's height and top
      */
     postMeasure?(node: INode, ctx: IMeasureContext): void;
-  }
+  };
 };

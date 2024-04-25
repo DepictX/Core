@@ -5,8 +5,8 @@ import {
   BLOCK,
   MEASUREMENTS,
   INode,
-  INLINE,
 } from 'engine';
+
 import { DEFAULT_METRICS } from '../../consts';
 
 export const VIEW_SYMBOL = Symbol('View');
@@ -27,12 +27,17 @@ View[MEASUREMENTS] = {
     const minHeight = node.style?.minHeight;
     const maxHeight = node.style?.maxHeight;
 
-    if (!node.firstChild) return { minWidth, maxWidth, minHeight, maxHeight };
+    if (!node.firstChild) return {
+      minWidth,
+      maxWidth,
+      minHeight,
+      maxHeight, 
+    };
 
     const children = node.children;
     console.assert(
-      new Set(children.map((c) => c.type[LAYOUT_TYPE])).size <= 1,
-      'Can not mix BLOCK and INLINE nodes!'
+      new Set(children.map(c => c.type[LAYOUT_TYPE])).size <= 1,
+      'Can not mix BLOCK and INLINE nodes!',
     );
 
     return {
@@ -43,12 +48,12 @@ View[MEASUREMENTS] = {
       fitContent:
         node.firstChild.type[LAYOUT_TYPE] === BLOCK
           ? Math.max(
-              ...children.map((c) => ctx.getNodeConstrains(c).fitContent || 0)
-            )
+            ...children.map(c => ctx.getNodeConstrains(c).fitContent || 0),
+          )
           : children.reduce(
-              (s, c) => s + (ctx.getNodeConstrains(c).fitContent || 0),
-              0
-            ),
+            (s, c) => s + (ctx.getNodeConstrains(c).fitContent || 0),
+            0,
+          ),
     };
   },
   measure(node, ctx) {
@@ -57,11 +62,11 @@ View[MEASUREMENTS] = {
       : ctx.containerConstrains.width;
     node.metrics!.left = 0;
   },
-  postMeasure(node, ctx) {
+  postMeasure(node, _ctx) {
     node.metrics!.height = node.firstChild
       ? node.firstChild.type[LAYOUT_TYPE] === BLOCK
         ? node.children.reduce((s, c) => s + c.metrics!.height, 0)
-        : Math.max(...node.children.map((c) => c.metrics!.height))
+        : Math.max(...node.children.map(c => c.metrics!.height))
       : 0;
     node.metrics!.top = node.prevSibling
       ? node.prevSibling.metrics!.top + node.prevSibling.metrics!.height

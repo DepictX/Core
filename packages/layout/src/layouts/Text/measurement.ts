@@ -9,7 +9,7 @@ export interface ITextMetrics extends TextMetrics {
 export function measureText(
   text: string,
   fontFamily: string,
-  fontSize: number
+  fontSize: number,
 ): ITextMetrics {
   const ctx = getCanvasContext();
 
@@ -36,8 +36,13 @@ export function measureText(
     actualBoundingBoxLeft: textMetrics.actualBoundingBoxLeft,
     actualBoundingBoxRight: textMetrics.actualBoundingBoxRight,
     fontBoundingBoxAscent: textMetrics.fontBoundingBoxAscent,
-    fontBoundingBoxDescent:textMetrics.fontBoundingBoxDescent,
-  }
+    fontBoundingBoxDescent: textMetrics.fontBoundingBoxDescent,
+    alphabeticBaseline: 0,
+    emHeightAscent: 0,
+    emHeightDescent: 0,
+    hangingBaseline: 0,
+    ideographicBaseline: 0,
+  };
 
   wordsMetrics.set(text, wordMetrics);
   return wordMetrics;

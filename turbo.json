@@ -9,7 +9,9 @@
     "build": {
       "cache": false,
       "dependsOn": [],
-      "outputs": ["dist/**"]
+      "outputs": [
+        "dist/**"
+      ]
     }
   }
 }

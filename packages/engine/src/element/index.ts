@@ -1,4 +1,5 @@
 import { IElementProps } from '../interface';
+
 import { Element } from './Element';
 
 const RESERVED_PROPS = new Set(['key', 'ref']);
@@ -19,4 +20,4 @@ export function createElement(
   return Element.create(type, config?.key, config?.ref, props);
 }
 
-export {Element};
+export { Element };
