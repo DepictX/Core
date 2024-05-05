@@ -25,6 +25,8 @@
     "vite-config": "workspace:*"
   },
   "dependencies": {
-    "reflect-metadata": "^0.2.2"
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
   }
 }
