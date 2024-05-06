@@ -56,12 +56,21 @@ importers:
 
   demo:
     dependencies:
+      '@depict-x/core':
+        specifier: workspace:^
+        version: link:../packages/core
       engine:
         specifier: workspace:^
         version: link:../packages/engine
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
       layout:
         specifier: workspace:^
         version: link:../packages/layout
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
       renderer:
         specifier: workspace:^
         version: link:../packages/renderer
@@ -78,6 +87,9 @@ importers:
       '@depict-x/ts-config':
         specifier: workspace:*
         version: link:../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../configs/vite-config
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
@@ -93,9 +105,6 @@ importers:
       vite:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.15.11)
-      vite-config:
-        specifier: workspace:*
-        version: link:../configs/vite-config
 
   packages/core:
     dependencies:
@@ -115,6 +124,9 @@ importers:
       '@depict-x/ts-config':
         specifier: workspace:*
         version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
@@ -127,9 +139,6 @@ importers:
       vite:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.15.11)
-      vite-config:
-        specifier: workspace:*
-        version: link:../../configs/vite-config
 
   packages/engine:
     devDependencies:
@@ -139,6 +148,9 @@ importers:
       '@depict-x/ts-config':
         specifier: workspace:*
         version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
@@ -151,9 +163,6 @@ importers:
       vite:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.15.11)
-      vite-config:
-        specifier: workspace:*
-        version: link:../../configs/vite-config
 
   packages/event:
     devDependencies:
@@ -163,6 +172,9 @@ importers:
       '@depict-x/ts-config':
         specifier: workspace:*
         version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
@@ -175,9 +187,6 @@ importers:
       vite:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.15.11)
-      vite-config:
-        specifier: workspace:*
-        version: link:../../configs/vite-config
 
   packages/layout:
     dependencies:
@@ -194,6 +203,9 @@ importers:
       '@depict-x/ts-config':
         specifier: workspace:*
         version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
@@ -206,18 +218,27 @@ importers:
       vite:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.15.11)
-      vite-config:
-        specifier: workspace:*
-        version: link:../../configs/vite-config
 
   packages/renderer:
     dependencies:
+      '@depict-x/core':
+        specifier: workspace:^
+        version: link:../core
       engine:
         specifier: workspace:^
         version: link:../engine
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
       layout:
         specifier: workspace:^
         version: link:../layout
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
     devDependencies:
       '@depict-x/eslint-config':
         specifier: workspace:*
@@ -225,6 +246,9 @@ importers:
       '@depict-x/ts-config':
         specifier: workspace:*
         version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
@@ -237,9 +261,6 @@ importers:
       vite:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.15.11)
-      vite-config:
-        specifier: workspace:*
-        version: link:../../configs/vite-config
 
   packages/selection:
     dependencies:
@@ -253,6 +274,9 @@ importers:
       '@depict-x/ts-config':
         specifier: workspace:*
         version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
@@ -265,9 +289,6 @@ importers:
       vite:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.15.11)
-      vite-config:
-        specifier: workspace:*
-        version: link:../../configs/vite-config
 
 packages:
 

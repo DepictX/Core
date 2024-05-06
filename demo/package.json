@@ -15,9 +15,12 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@depict-x/core": "workspace:^",
     "engine": "workspace:^",
     "layout": "workspace:^",
-    "renderer": "workspace:^"
+    "renderer": "workspace:^",
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.22.8",
@@ -29,6 +32,6 @@
     "eslint": "^8.53.0",
     "typescript": "^5.0.4",
     "vite": "^4.2.1",
-    "vite-config": "workspace:*"
+    "@depict-x/vite-config": "workspace:*"
   }
 }

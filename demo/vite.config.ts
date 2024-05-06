@@ -1,5 +1,5 @@
 import { PluginOption, defineConfig } from 'vite'
-import * as defaultConfig from 'vite-config'
+import * as defaultConfig from '@depict-x/vite-config'
 // import react from '@vitejs/plugin-react'
 // @ts-ignore
 import { transformSync } from '@babel/core';

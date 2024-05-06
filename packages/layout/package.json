@@ -26,6 +26,6 @@
     "eslint": "^8.53.0",
     "typescript": "^5.0.4",
     "vite": "^4.2.1",
-    "vite-config": "workspace:*"
+    "@depict-x/vite-config": "workspace:*"
   }
 }

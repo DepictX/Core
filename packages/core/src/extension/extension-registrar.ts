@@ -1,9 +1,10 @@
-import { inject, injectable } from 'inversify';
+import { inject, injectable, interfaces } from 'inversify';
 
 import { Injector, InjectorId } from '../injector';
 import { LifecycleService, LifecycleStage } from '../lifecycle';
 
 import { Extension, IExtensionCtor, IOptions } from './extension';
+import { isExtensionCtor } from './utils';
 
 const LifecycleCaller = {
   [LifecycleStage.onInit]: 'onInit',
@@ -14,8 +15,7 @@ const LifecycleCaller = {
 
 export interface IExtensionsRegistrar {
   register(Extension: IExtensionCtor, options?: IOptions): void;
-  register(Extensions: [IExtensionCtor, IOptions?][]): void;
-  register(Extension: IExtensionCtor | ([IExtensionCtor, IOptions?][]), options?: IOptions): void;
+  register(identifier: interfaces.ServiceIdentifier<Extension>, Extension: IExtensionCtor, options?: IOptions): void;
 }
 
 @injectable()
@@ -35,38 +35,48 @@ export class ExtensionsRegistrar implements IExtensionsRegistrar {
     });
   }
 
-  register(Extension: IExtensionCtor | ([IExtensionCtor, IOptions?][]), options?: IOptions) {
-    let Extensions = Extension as [IExtensionCtor, IOptions?][];
-
-    if (!Array.isArray(Extension)) {
-      Extensions = [[Extension, options]];
+  register(
+    identifier: interfaces.ServiceIdentifier<Extension> | IExtensionCtor,
+    Extension?: IExtensionCtor | IOptions,
+    options?: IOptions,
+  ) {
+    let id: interfaces.ServiceIdentifier<Extension> | undefined;
+    let E: IExtensionCtor | undefined;
+    if (isExtensionCtor(identifier)) {
+      E = identifier;
+    } else if (isExtensionCtor(Extension)) {
+      id = identifier;
+      E = Extension;
     }
 
-    Extensions.forEach(([E, o]) => {
-      if (this._Extensions.has(E)) {
-        throw new Error(`Extension ${E} is already registered!`);
-      }
+    if (!E || this._Extensions.has(E)) {
+      throw new Error(`Extension ${E} is already registered!`);
+    }
 
-      this._Extensions.set(E, o);
+    this._Extensions.set(E, options);
 
+    if (id) {
+      this._injector.bind(id).to(E);
+    } else {
       this._injector.bind(E).toSelf();
+    }
 
-      const extension = this._injector.get<Extension>(E);
+    const extension = this._injector.get<Extension>(id || E);
 
-      const index = this._extensionIns.findIndex(m => (m.constructor as IExtensionCtor).priority > E.priority);
+    const index = this._extensionIns.findIndex(m => (m.constructor as IExtensionCtor).priority > E.priority);
 
-      if (index === -1) {
-        this._extensionIns.push(extension);
+    if (index === -1) {
+      this._extensionIns.push(extension);
+    } else {
+      this._extensionIns.splice(index, 0, extension);
+    }
+
+    for (let stage = LifecycleStage.onInit; stage <= this._lifecycle.getStage(); stage++) {
+      if (stage === LifecycleStage.onInit) {
+        extension[LifecycleCaller[stage]]?.(options);
       } else {
-        this._extensionIns.splice(index, 0, extension);
-      }
-
-      for (let stage = LifecycleStage.onStart; stage <= this._lifecycle.getStage(); stage++) {
-        if (stage === LifecycleStage.onInit) {
-          return extension[LifecycleCaller[stage]]?.(o);
-        }
         extension[LifecycleCaller[stage]]?.();
       }
-    });
+    }
   }
 }

@@ -1,7 +1,8 @@
 import { Engine, createEffect, createSignal } from 'engine';
 import { Flex, View, Text, Inline } from 'layout';
-import { View as ViewModule } from 'renderer';
+import { Renderer, View as ViewModule } from 'renderer';
 import { Layout } from 'layout';
+import { DepictX as TestX, RenderExtensionId } from '@depict-x/core';
 
 function TestClassComponent({ text }) {
   const [count, setCount] = createSignal(0);
@@ -64,3 +65,6 @@ const canvas = document.querySelector('#canvas');
 window.engine = engine;
 
 engine.render(<App><View><Text content='abc' /></View></App>, canvas);
+
+const depictX = new TestX();
+depictX.register(RenderExtensionId, Renderer, {})

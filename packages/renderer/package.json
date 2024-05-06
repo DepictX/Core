@@ -16,8 +16,12 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@depict-x/core": "workspace:^",
     "engine": "workspace:^",
-    "layout": "workspace:^"
+    "layout": "workspace:^",
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
     "@depict-x/eslint-config": "workspace:*",
@@ -26,6 +30,6 @@
     "eslint": "^8.53.0",
     "typescript": "^5.0.4",
     "vite": "^4.2.1",
-    "vite-config": "workspace:*"
+    "@depict-x/vite-config": "workspace:*"
   }
 }
