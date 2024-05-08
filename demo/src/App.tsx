@@ -67,4 +67,4 @@ window.engine = engine;
 engine.render(<App><View><Text content='abc' /></View></App>, canvas);
 
 const depictX = new TestX();
-depictX.register(RenderExtensionId, Renderer, {})
+depictX.register(Renderer, { container: canvas })

@@ -2,15 +2,18 @@ import { Extension } from '@depict-x/core';
 import { injectable } from 'inversify';
 
 export interface IRendererOptions {
-
+  container: HTMLElement;
 }
 
 @injectable()
-export class Renderer<T extends IRendererOptions> extends Extension {
-  private _options: T;
+export class Renderer extends Extension<IRendererOptions> {
 
-  onInit(options: T) {
+  onInit(options: IRendererOptions) {
     this._options = options;
     console.warn('Renderer init');
+  }
+
+  onReady(): void {
+    this._options.container;
   }
 }

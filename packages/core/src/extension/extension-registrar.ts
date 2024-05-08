@@ -1,9 +1,10 @@
 import { inject, injectable, interfaces } from 'inversify';
 
+import { Disposable } from '../disposable';
 import { Injector, InjectorId } from '../injector';
 import { LifecycleService, LifecycleStage } from '../lifecycle';
 
-import { Extension, IExtensionCtor, IOptions } from './extension';
+import { Extension, IExtensionCtor } from './extension';
 import { isExtensionCtor } from './utils';
 
 const LifecycleCaller = {
@@ -13,38 +14,40 @@ const LifecycleCaller = {
   [LifecycleStage.onDestroy]: 'onDestroy',
 } as const;
 
-export interface IExtensionsRegistrar {
-  register(Extension: IExtensionCtor, options?: IOptions): void;
-  register(identifier: interfaces.ServiceIdentifier<Extension>, Extension: IExtensionCtor, options?: IOptions): void;
-}
-
 @injectable()
-export class ExtensionsRegistrar implements IExtensionsRegistrar {
-  private _extensionIns: Extension[] = [];
-  private _Extensions = new Map<IExtensionCtor, IOptions | undefined>();
+export class ExtensionsRegistrar extends Disposable {
+  private _extensionIns: Extension<any>[] = [];
+  private _Extensions = new Map<IExtensionCtor<any>, any>();
 
   constructor(
     @inject(InjectorId) private _injector: Injector,
     @inject(LifecycleService) private _lifecycle: LifecycleService,
   ) {
-    this._lifecycle.stage$.subscribe(stage => {
+    super();
+    this.with(this._lifecycle.stage$.subscribe(stage => {
       if (stage === LifecycleStage.onInit) {
         return;
       }
       this._extensionIns.forEach(extension => extension[LifecycleCaller[stage]]?.());
-    });
+    }));
   }
 
-  register(
-    identifier: interfaces.ServiceIdentifier<Extension> | IExtensionCtor,
-    Extension?: IExtensionCtor | IOptions,
-    options?: IOptions,
+  register<T>(Extension: IExtensionCtor<T>, options?: T): void;
+  register<T>(
+    identifier: interfaces.ServiceIdentifier<Extension<T>>,
+    Extension: IExtensionCtor<T>,
+    options?: T,
+  ): void;
+  register<T>(
+    identifier: interfaces.ServiceIdentifier<Extension<T>> | IExtensionCtor<T>,
+    Extension?: IExtensionCtor<T> | T,
+    options?: T,
   ) {
-    let id: interfaces.ServiceIdentifier<Extension> | undefined;
-    let E: IExtensionCtor | undefined;
+    let id: interfaces.ServiceIdentifier<Extension<T>> | undefined;
+    let E: IExtensionCtor<T> | undefined;
     if (isExtensionCtor(identifier)) {
       E = identifier;
-    } else if (isExtensionCtor(Extension)) {
+    } else if (isExtensionCtor<T>(Extension)) {
       id = identifier;
       E = Extension;
     }
@@ -61,7 +64,7 @@ export class ExtensionsRegistrar implements IExtensionsRegistrar {
       this._injector.bind(E).toSelf();
     }
 
-    const extension = this._injector.get<Extension>(id || E);
+    const extension = this._injector.get<Extension<T>>(id || E);
 
     const index = this._extensionIns.findIndex(m => (m.constructor as IExtensionCtor).priority > E.priority);
 
@@ -73,7 +76,7 @@ export class ExtensionsRegistrar implements IExtensionsRegistrar {
 
     for (let stage = LifecycleStage.onInit; stage <= this._lifecycle.getStage(); stage++) {
       if (stage === LifecycleStage.onInit) {
-        extension[LifecycleCaller[stage]]?.(options);
+        extension[LifecycleCaller[stage]]?.(options as T);
       } else {
         extension[LifecycleCaller[stage]]?.();
       }

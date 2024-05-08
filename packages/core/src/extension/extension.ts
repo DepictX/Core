@@ -4,13 +4,17 @@ export interface IOptions {
   [key: string]: any;
 }
 
-export type IExtensionCtor = interfaces.Newable<Extension> & { priority: number };
+export type IExtensionCtor<T = undefined> = interfaces.Newable<Extension<T>> & { priority: number };
 
 @injectable()
-export abstract class Extension {
+export abstract class Extension<T = undefined> {
   static priority = 0;
 
-  onInit?(options?: IOptions): void;
+  protected _options: T;
+
+  onInit?(options: T) {
+    this._options = options;
+  };
 
   onStart?(): void;
   

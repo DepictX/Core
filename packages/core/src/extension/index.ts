@@ -1,3 +1,2 @@
-export { Extension } from './extension';
-export type { IExtensionsRegistrar } from './extension-registrar';
+export { Extension, type IExtensionCtor } from './extension';
 export { ExtensionsRegistrar } from './extension-registrar';

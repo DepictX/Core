@@ -1,4 +1,6 @@
-import { ExtensionsRegistrar } from '../extension';
+import { interfaces } from 'inversify';
+
+import { ExtensionsRegistrar, Extension, IExtensionCtor } from '../extension';
 import { Injector, InjectorId } from '../injector';
 import { LifecycleService, LifecycleStage } from '../lifecycle';
 
@@ -22,6 +24,12 @@ export class DepictX {
     this._injector.bind(LifecycleService).toSelf();
   }
 
+  register<T>(Extension: IExtensionCtor<T>, options?: T): void;
+  register<T>(
+    identifier: interfaces.ServiceIdentifier<Extension<T>>,
+    Extension: IExtensionCtor<T>,
+    options?: T,
+  ): void;
   register(...args: Parameters<ExtensionsRegistrar['register']>) {
     this._registrar.register(...args);
   }
