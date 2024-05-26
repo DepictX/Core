@@ -6,7 +6,6 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "index.js",
   "scripts": {
     "build": "vite build",
     "dev": "vite dev --port 3000",
@@ -16,6 +15,12 @@
   },
   "dependencies": {
     "@depict-x/core": "workspace:^",
+    "@depict-x/dsl": "workspace:^",
+    "@depict-x/reconciler": "workspace:^",
+    "@depict-plugins/flex": "workspace:^",
+    "@depict-plugins/inline": "workspace:^",
+    "@depict-plugins/view": "workspace:^",
+    "@depict-plugins/text": "workspace:^",
     "engine": "workspace:^",
     "layout": "workspace:^",
     "renderer": "workspace:^",

@@ -10,14 +10,17 @@
   "types": "src/index.ts",
   "scripts": {
     "build": "vite build",
-    "dev": "vite dev --port 3000",
     "lint": "eslint \"src/**/*.ts\"",
     "start": "vite preview",
     "type-check": "tsc"
   },
   "dependencies": {
     "css-line-break": "^2.1.0",
-    "engine": "workspace:^"
+    "engine": "workspace:^",
+    "@depict-x/core": "workspace:*",
+    "@depict-x/measurement": "workspace:*",
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@depict-x/eslint-config": "workspace:*",

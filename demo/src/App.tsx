@@ -1,8 +1,10 @@
-import { Engine, createEffect, createSignal } from 'engine';
-import { Flex, View, Text, Inline } from 'layout';
-import { Renderer, View as ViewModule } from 'renderer';
-import { Layout } from 'layout';
-import { DepictX as TestX, RenderExtensionId } from '@depict-x/core';
+import { createEffect, createSignal, Flex, View, Text, Inline } from '@depict-x/dsl';
+// import { Flex, View, Text, Inline, LayoutExtension } from 'layout';
+// import { Renderer, View as ViewModule } from 'renderer';
+// import { Layout } from 'layout';
+// import { DepictX as TestX, RenderExtensionId, LayoutExtensionId } from '@depict-x/core';
+// import { FlexPlugin } from '@depict-plugins/flex';
+import { createDepictX } from './depict';
 
 function TestClassComponent({ text }) {
   const [count, setCount] = createSignal(0);
@@ -56,15 +58,15 @@ export function App(props) {
 }
 
 
-const engine = new Engine();
+// const engine = new Engine();
 
-engine.use(new Layout());
-engine.use(new ViewModule());
+// engine.use(new Layout());
+// engine.use(new ViewModule());
 
 const canvas = document.querySelector('#canvas');
-window.engine = engine;
+// window.engine = engine;
 
-engine.render(<App><View><Text content='abc' /></View></App>, canvas);
+// engine.render(<App><View><Text content='abc' /></View></App>, canvas);
 
-const depictX = new TestX();
-depictX.register(Renderer, { container: canvas })
+const depict = createDepictX(canvas);
+depict.render(<App><View><Text content='abc' /></View></App>);

@@ -23,7 +23,7 @@ export default defineConfig({
               [
                 '@babel/plugin-transform-react-jsx',
                 {
-                  pragma: 'DepictX.createElement',
+                  pragma: 'DepictDsl.createElement',
                 },
               ],
             ],
@@ -35,7 +35,7 @@ export default defineConfig({
     } as PluginOption,
   ],
   esbuild: {
-    jsxFactory: 'DepictX.createElement',
-    jsxInject: `import * as DepictX from 'engine'`,
+    jsxFactory: 'DepictDsl.createElement',
+    jsxInject: `import * as DepictDsl from 'engine'`,
   },
 });

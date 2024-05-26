@@ -10,7 +10,6 @@
   "types": "src/index.ts",
   "scripts": {
     "build": "vite build",
-    "dev": "vite dev --port 3000",
     "lint": "eslint \"src/**/*.ts\"",
     "start": "vite preview",
     "type-check": "tsc"
@@ -23,5 +22,9 @@
     "typescript": "^5.0.4",
     "vite": "^4.2.1",
     "@depict-x/vite-config": "workspace:*"
+  },
+  "dependencies": {
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.2"
   }
 }

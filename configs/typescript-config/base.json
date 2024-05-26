@@ -22,8 +22,5 @@
     "strict": true,
     "target": "ESNext"
   },
-  "display": "Default",
-  "exclude": [
-    "node_modules"
-  ]
+  "display": "Default"
 }

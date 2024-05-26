@@ -11,4 +11,12 @@ export { toDisposable, Disposable } from './disposable';
 export { RenderExtensionId } from './interfaces/render';
 export type { IRenderer } from './interfaces/render';
 
-export {} from './plugin';
+export { Plugin, PluginManagerId, PluginManager } from './plugin';
+
+export { Node, TextNode } from './node';
+export type {
+  IDefaultProps, IDefaultStyle, IFontStyle, IStyle, 
+} from './node';
+
+export * from './interfaces';
+export * from './utils';

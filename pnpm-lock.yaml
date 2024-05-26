@@ -56,9 +56,27 @@ importers:
 
   demo:
     dependencies:
+      '@depict-plugins/flex':
+        specifier: workspace:^
+        version: link:../packages/plugins/flex
+      '@depict-plugins/inline':
+        specifier: workspace:^
+        version: link:../packages/plugins/inline
+      '@depict-plugins/text':
+        specifier: workspace:^
+        version: link:../packages/plugins/text
+      '@depict-plugins/view':
+        specifier: workspace:^
+        version: link:../packages/plugins/view
       '@depict-x/core':
         specifier: workspace:^
         version: link:../packages/core
+      '@depict-x/dsl':
+        specifier: workspace:^
+        version: link:../packages/dsl
+      '@depict-x/reconciler':
+        specifier: workspace:^
+        version: link:../packages/reconciler
       engine:
         specifier: workspace:^
         version: link:../packages/engine
@@ -140,6 +158,64 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@18.15.11)
 
+  packages/dsl:
+    dependencies:
+      '@depict-plugins/flex':
+        specifier: workspace:^
+        version: link:../plugins/flex
+      '@depict-plugins/inline':
+        specifier: workspace:^
+        version: link:../plugins/inline
+      '@depict-plugins/text':
+        specifier: workspace:^
+        version: link:../plugins/text
+      '@depict-plugins/view':
+        specifier: workspace:^
+        version: link:../plugins/view
+      '@depict-x/core':
+        specifier: workspace:^
+        version: link:../core
+      engine:
+        specifier: workspace:^
+        version: link:../engine
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      layout:
+        specifier: workspace:^
+        version: link:../layout
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.22.8
+        version: 7.23.3
+      '@depict-x/eslint-config':
+        specifier: workspace:*
+        version: link:../../configs/eslint-config
+      '@depict-x/ts-config':
+        specifier: workspace:*
+        version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
+      '@types/node':
+        specifier: ^18.15.11
+        version: 18.15.11
+      eslint:
+        specifier: ^8.53.0
+        version: 8.53.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.15.11)
+
   packages/engine:
     devDependencies:
       '@depict-x/eslint-config':
@@ -165,6 +241,13 @@ importers:
         version: 4.2.1(@types/node@18.15.11)
 
   packages/event:
+    dependencies:
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
     devDependencies:
       '@depict-x/eslint-config':
         specifier: workspace:*
@@ -190,12 +273,255 @@ importers:
 
   packages/layout:
     dependencies:
+      '@depict-x/core':
+        specifier: workspace:*
+        version: link:../core
+      '@depict-x/measurement':
+        specifier: workspace:*
+        version: link:../measurement
       css-line-break:
         specifier: ^2.1.0
         version: 2.1.0
       engine:
         specifier: workspace:^
         version: link:../engine
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+    devDependencies:
+      '@depict-x/eslint-config':
+        specifier: workspace:*
+        version: link:../../configs/eslint-config
+      '@depict-x/ts-config':
+        specifier: workspace:*
+        version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
+      '@types/node':
+        specifier: ^18.15.11
+        version: 18.15.11
+      eslint:
+        specifier: ^8.53.0
+        version: 8.53.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.15.11)
+
+  packages/measurement:
+    dependencies:
+      '@depict-x/core':
+        specifier: workspace:*
+        version: link:../core
+      css-line-break:
+        specifier: ^2.1.0
+        version: 2.1.0
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+    devDependencies:
+      '@depict-x/eslint-config':
+        specifier: workspace:*
+        version: link:../../configs/eslint-config
+      '@depict-x/ts-config':
+        specifier: workspace:*
+        version: link:../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../configs/vite-config
+      '@types/node':
+        specifier: ^18.15.11
+        version: 18.15.11
+      eslint:
+        specifier: ^8.53.0
+        version: 8.53.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.15.11)
+
+  packages/plugins/flex:
+    dependencies:
+      '@depict-x/core':
+        specifier: workspace:^
+        version: link:../../core
+      '@depict-x/measurement':
+        specifier: workspace:^
+        version: link:../../measurement
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
+    devDependencies:
+      '@depict-x/eslint-config':
+        specifier: workspace:*
+        version: link:../../../configs/eslint-config
+      '@depict-x/ts-config':
+        specifier: workspace:*
+        version: link:../../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../../configs/vite-config
+      '@types/node':
+        specifier: ^18.15.11
+        version: 18.15.11
+      eslint:
+        specifier: ^8.53.0
+        version: 8.53.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.15.11)
+
+  packages/plugins/inline:
+    dependencies:
+      '@depict-x/core':
+        specifier: workspace:^
+        version: link:../../core
+      '@depict-x/measurement':
+        specifier: workspace:^
+        version: link:../../measurement
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
+    devDependencies:
+      '@depict-x/eslint-config':
+        specifier: workspace:*
+        version: link:../../../configs/eslint-config
+      '@depict-x/ts-config':
+        specifier: workspace:*
+        version: link:../../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../../configs/vite-config
+      '@types/node':
+        specifier: ^18.15.11
+        version: 18.15.11
+      eslint:
+        specifier: ^8.53.0
+        version: 8.53.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.15.11)
+
+  packages/plugins/text:
+    dependencies:
+      '@depict-x/core':
+        specifier: workspace:^
+        version: link:../../core
+      '@depict-x/measurement':
+        specifier: workspace:^
+        version: link:../../measurement
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
+    devDependencies:
+      '@depict-x/eslint-config':
+        specifier: workspace:*
+        version: link:../../../configs/eslint-config
+      '@depict-x/ts-config':
+        specifier: workspace:*
+        version: link:../../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../../configs/vite-config
+      '@types/node':
+        specifier: ^18.15.11
+        version: 18.15.11
+      eslint:
+        specifier: ^8.53.0
+        version: 8.53.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.15.11)
+
+  packages/plugins/view:
+    dependencies:
+      '@depict-x/core':
+        specifier: workspace:^
+        version: link:../../core
+      '@depict-x/measurement':
+        specifier: workspace:^
+        version: link:../../measurement
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
+    devDependencies:
+      '@depict-x/eslint-config':
+        specifier: workspace:*
+        version: link:../../../configs/eslint-config
+      '@depict-x/ts-config':
+        specifier: workspace:*
+        version: link:../../../configs/typescript-config
+      '@depict-x/vite-config':
+        specifier: workspace:*
+        version: link:../../../configs/vite-config
+      '@types/node':
+        specifier: ^18.15.11
+        version: 18.15.11
+      eslint:
+        specifier: ^8.53.0
+        version: 8.53.0
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.15.11)
+
+  packages/reconciler:
+    dependencies:
+      '@depict-x/core':
+        specifier: workspace:*
+        version: link:../core
+      inversify:
+        specifier: ^6.0.2
+        version: 6.0.2
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
     devDependencies:
       '@depict-x/eslint-config':
         specifier: workspace:*

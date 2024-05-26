@@ -7,7 +7,7 @@ export interface IOptions {
 export type IExtensionCtor<T = undefined> = interfaces.Newable<Extension<T>> & { priority: number };
 
 @injectable()
-export abstract class Extension<T = undefined> {
+export abstract class Extension<T = unknown> {
   static priority = 0;
 
   protected _options: T;
