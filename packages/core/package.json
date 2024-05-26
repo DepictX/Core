@@ -14,18 +14,18 @@
     "start": "vite preview",
     "type-check": "tsc"
   },
-  "devDependencies": {
-    "@depict-x/eslint-config": "workspace:*",
-    "@depict-x/ts-config": "workspace:*",
-    "@types/node": "^18.15.11",
-    "eslint": "^8.53.0",
-    "typescript": "^5.0.4",
-    "vite": "^4.2.1",
-    "@depict-x/vite-config": "workspace:*"
-  },
   "dependencies": {
     "inversify": "^6.0.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@depict-x/eslint-config": "workspace:*",
+    "@depict-x/ts-config": "workspace:*",
+    "@depict-x/vite-config": "workspace:*",
+    "@types/node": "^18.15.11",
+    "eslint": "^8.53.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.2.1"
   }
 }

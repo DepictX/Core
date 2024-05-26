@@ -36,6 +36,6 @@ export default defineConfig({
   ],
   esbuild: {
     jsxFactory: 'DepictDsl.createElement',
-    jsxInject: `import * as DepictDsl from 'engine'`,
+    jsxInject: `import * as DepictDsl from '@depict-x/dsl'`,
   },
 });

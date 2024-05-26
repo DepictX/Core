@@ -14,16 +14,15 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@depict-x/core": "workspace:^",
-    "@depict-x/dsl": "workspace:^",
-    "@depict-x/reconciler": "workspace:^",
     "@depict-plugins/flex": "workspace:^",
     "@depict-plugins/inline": "workspace:^",
-    "@depict-plugins/view": "workspace:^",
     "@depict-plugins/text": "workspace:^",
-    "engine": "workspace:^",
-    "layout": "workspace:^",
-    "renderer": "workspace:^",
+    "@depict-plugins/view": "workspace:^",
+    "@depict-x/core": "workspace:^",
+    "@depict-x/dsl": "workspace:^",
+    "@depict-x/layout": "workspace:^",
+    "@depict-x/reconciler": "workspace:^",
+    "@depict-x/renderer": "workspace:^",
     "inversify": "^6.0.2",
     "reflect-metadata": "^0.2.2"
   },
@@ -32,11 +31,11 @@
     "@babel/plugin-transform-react-jsx": "^7.22.5",
     "@depict-x/eslint-config": "workspace:*",
     "@depict-x/ts-config": "workspace:*",
+    "@depict-x/vite-config": "workspace:*",
     "@types/node": "^18.15.11",
     "@vitejs/plugin-react": "^4.0.2",
     "eslint": "^8.53.0",
     "typescript": "^5.0.4",
-    "vite": "^4.2.1",
-    "@depict-x/vite-config": "workspace:*"
+    "vite": "^4.2.1"
   }
 }

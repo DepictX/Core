@@ -1,6 +1,0 @@
-{
-  "extends": "@depict-x/ts-config/ioc.json",
-  "include": [
-    "."
-  ]
-}

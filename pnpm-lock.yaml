@@ -74,24 +74,21 @@ importers:
       '@depict-x/dsl':
         specifier: workspace:^
         version: link:../packages/dsl
+      '@depict-x/layout':
+        specifier: workspace:^
+        version: link:../packages/layout
       '@depict-x/reconciler':
         specifier: workspace:^
         version: link:../packages/reconciler
-      engine:
+      '@depict-x/renderer':
         specifier: workspace:^
-        version: link:../packages/engine
+        version: link:../packages/renderer
       inversify:
         specifier: ^6.0.2
         version: 6.0.2
-      layout:
-        specifier: workspace:^
-        version: link:../packages/layout
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
-      renderer:
-        specifier: workspace:^
-        version: link:../packages/renderer
     devDependencies:
       '@babel/core':
         specifier: ^7.22.8
@@ -175,15 +172,12 @@ importers:
       '@depict-x/core':
         specifier: workspace:^
         version: link:../core
-      engine:
+      '@depict-x/layout':
         specifier: workspace:^
-        version: link:../engine
+        version: link:../layout
       inversify:
         specifier: ^6.0.2
         version: 6.0.2
-      layout:
-        specifier: workspace:^
-        version: link:../layout
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -194,30 +188,6 @@ importers:
       '@babel/core':
         specifier: ^7.22.8
         version: 7.23.3
-      '@depict-x/eslint-config':
-        specifier: workspace:*
-        version: link:../../configs/eslint-config
-      '@depict-x/ts-config':
-        specifier: workspace:*
-        version: link:../../configs/typescript-config
-      '@depict-x/vite-config':
-        specifier: workspace:*
-        version: link:../../configs/vite-config
-      '@types/node':
-        specifier: ^18.15.11
-        version: 18.15.11
-      eslint:
-        specifier: ^8.53.0
-        version: 8.53.0
-      typescript:
-        specifier: ^5.0.4
-        version: 5.0.4
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
-
-  packages/engine:
-    devDependencies:
       '@depict-x/eslint-config':
         specifier: workspace:*
         version: link:../../configs/eslint-config
@@ -282,9 +252,6 @@ importers:
       css-line-break:
         specifier: ^2.1.0
         version: 2.1.0
-      engine:
-        specifier: workspace:^
-        version: link:../engine
       inversify:
         specifier: ^6.0.2
         version: 6.0.2
@@ -550,15 +517,12 @@ importers:
       '@depict-x/core':
         specifier: workspace:^
         version: link:../core
-      engine:
+      '@depict-x/layout':
         specifier: workspace:^
-        version: link:../engine
+        version: link:../layout
       inversify:
         specifier: ^6.0.2
         version: 6.0.2
-      layout:
-        specifier: workspace:^
-        version: link:../layout
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2

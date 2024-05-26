@@ -1,8 +1,8 @@
 {
+  "exclude": [],
   "extends": "@depict-x/ts-config/ioc.json",
   "include": [
     ".",
     "node_modules/@depict-x/dsl"
-  ],
-  "exclude": []
+  ]
 }

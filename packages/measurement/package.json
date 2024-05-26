@@ -14,6 +14,12 @@
     "start": "vite preview",
     "type-check": "tsc"
   },
+  "dependencies": {
+    "@depict-x/core": "workspace:*",
+    "css-line-break": "^2.1.0",
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.2"
+  },
   "devDependencies": {
     "@depict-x/eslint-config": "workspace:*",
     "@depict-x/ts-config": "workspace:*",
@@ -22,11 +28,5 @@
     "eslint": "^8.53.0",
     "typescript": "^5.0.4",
     "vite": "^4.2.1"
-  },
-  "dependencies": {
-    "@depict-x/core": "workspace:*",
-    "css-line-break": "^2.1.0",
-    "inversify": "^6.0.2",
-    "reflect-metadata": "^0.2.2"
   }
 }

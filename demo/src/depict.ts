@@ -1,8 +1,8 @@
 import { DepictX, RenderExtensionId, LayoutExtensionId, ReconcilerExtensionId } from '@depict-x/core';
 
-import { Renderer } from 'renderer';
+import { Renderer } from '@depict-x/renderer';
 import { FlexPlugin } from '@depict-plugins/flex';
-import { LayoutExtension } from 'layout';
+import { LayoutExtension } from '@depict-x/layout';
 import { InlinePlugin } from '@depict-plugins/inline';
 import { ViewPlugin } from '@depict-plugins/view';
 import { TextPlugin } from '@depict-plugins/text';

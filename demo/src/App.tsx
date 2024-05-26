@@ -1,9 +1,5 @@
 import { createEffect, createSignal, Flex, View, Text, Inline } from '@depict-x/dsl';
-// import { Flex, View, Text, Inline, LayoutExtension } from 'layout';
-// import { Renderer, View as ViewModule } from 'renderer';
-// import { Layout } from 'layout';
-// import { DepictX as TestX, RenderExtensionId, LayoutExtensionId } from '@depict-x/core';
-// import { FlexPlugin } from '@depict-plugins/flex';
+
 import { createDepictX } from './depict';
 
 function TestClassComponent({ text }) {
