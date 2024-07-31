@@ -9,7 +9,7 @@ export type IDefaultStyle = Nullable<Partial<IStyle>>;
 export type IDefaultTextStyle = Nullable<Partial<IFontStyle>>;
 
 export abstract class Node<
-  P extends IDefaultProps = any, 
+  P extends IDefaultProps = any,
   S extends IDefaultStyle = any,
 > {
   static type: string;
@@ -124,7 +124,7 @@ export abstract class Node<
       child.descendants({
         pre,
         post,
-        self: true, 
+        self: true,
       });
     });
 

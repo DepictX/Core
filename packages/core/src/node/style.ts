@@ -9,7 +9,28 @@ export interface IFontStyle {
   textDecoration?: string;
 }
 
-export interface IStyle {
+export interface ILayoutStyle {
+  width?: number;
+  height?: number;
+
+  minWidth?: number;
+  maxWidth?: number;
+
+  minHeight?: number;
+  maxHeight?: number;
+
+  padding?: string;
+  paddingLeft?: string;
+  paddingRight?: string;
+  paddingTop?: string;
+  paddingBottom?: string;
+
+  zIndex?: number;
+
+  cursor?: string;
+}
+
+export interface IStyle extends ILayoutStyle {
   [key: string]: string | number | undefined;
 
   wordSpacing?: string;
@@ -41,21 +62,6 @@ export interface IStyle {
   borderWidth?: string;
   borderRadius?: string;
 
-  width?: number;
-  height?: number;
-
-  minWidth?: number;
-  maxWidth?: number;
-
-  minHeight?: number;
-  maxHeight?: number;
-
-  padding?: string;
-  paddingLeft?: string;
-  paddingRight?: string;
-  paddingTop?: string;
-  paddingBottom?: string;
-
   boxShadow?: string;
   boxShadowColor?: string;
   boxShadowBlur?: string;
@@ -67,10 +73,6 @@ export interface IStyle {
   backgroundImage?: string;
   backgroundRepeat?: string;
   backgroundPosition?: string;
-
-  cursor?: string;
-
-  zIndex?: number;
 
   opacity?: number;
 }
