@@ -4,6 +4,7 @@ import { Node } from '../../node';
 
 export interface IReconciler extends Extension {
   setRoot(node: Node): void;
+  getRoot(): Node;
   start(): void;
 }
 

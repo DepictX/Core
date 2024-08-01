@@ -2,6 +2,7 @@ import {
   Extension, type ILayout, LayoutExtensionId, type INode,
   IEvent,
   EventKeys,
+  toDisposable,
 } from '@depict-x/core';
 import { inject, injectable } from 'inversify';
 
@@ -22,7 +23,7 @@ export class Event extends Extension<IEventOptions> implements IEvent {
 
   constructor(private options: IEventOptions) {
     super();
-    this.delegateNativeEventListener('add');
+    this.with(toDisposable(this.delegateNativeEventListener()));
   }
 
   bind(node: INode) {
@@ -33,21 +34,21 @@ export class Event extends Extension<IEventOptions> implements IEvent {
       });
   }
 
-  onDestroy() {
-    this.delegateNativeEventListener('remove');
-  }
-
-  private delegateNativeEventListener(type: 'add' | 'remove') {
+  private delegateNativeEventListener() {
     const keys = Object.keys(EventKeys) as (keyof HTMLElementEventMap)[];
     const { canvas } = this.options;
-    keys.forEach(key => {
-      const handler = this[toHandler(key)] as (ev: HTMLElementEventMap[typeof key]) => any;
-      if (type === 'add') {
-        canvas.addEventListener(key, handler);
-      } else {
-        canvas.removeEventListener(key, handler);
-      }
+
+    keys.forEach((key) => {
+      const handler = this[toHandler(key)] as(ev: HTMLElementEventMap[typeof key]) => any;
+      canvas.addEventListener(key, handler);
     });
+
+    return () => {
+      keys.forEach((key) => {
+        const handler = this[toHandler(key)] as(ev: HTMLElementEventMap[typeof key]) => any;
+        canvas.removeEventListener(key, handler);
+      });
+    }
   }
 
   private handleMousedown(e: MouseEvent) {

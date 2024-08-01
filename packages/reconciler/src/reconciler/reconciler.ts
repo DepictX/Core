@@ -21,6 +21,10 @@ export class Reconciler extends Extension implements IReconciler {
     this.root = node;
   }
 
+  getRoot() {
+    return this.root;
+  }
+
   start() {
     this._layout.measure(this.root);
     this._renderer.render(this.root);
