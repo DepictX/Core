@@ -41,9 +41,15 @@ export class Picker {
     } else {
       const metrics = this._layout.getMetrics(node);
       if (contain(point, metrics)) {
-        return node.children
+        const newPoint = {};
+        for (const child of node.children) {
+          const target = this.findHitTarget(child, newPoint);
+          if (target) return;
+        }
       }
     }
+
+    return false;
   }
 
   private getPath() {}
